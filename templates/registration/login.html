@@ -1,0 +1,45 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+Login | Property Hub
+{% endblock %}
+
+{% block login %}
+<div class="login-page">
+  <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header pt-4 pb-4 text-center bg-primary text-white btn-primary" style="font-size: 2rem;">
+                        <span>Property Hub</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Log In</h4>
+                            <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                        </div>
+                        <form method="POST">
+                          {% csrf_token %}
+                          <div class="mb-3">
+                              <label for="emailaddress" class="form-label">Username</label>
+                              {{ form.username }}
+                              {{ form.username.error }}
+                          </div>
+                          <div class="mb-3">
+                              <label for="password" class="form-label">Password</label>
+                              {{ form.password }}
+                          </div>
+                          <div class="mb-3 mb-0 text-center">
+                              <button class="btn btn-primary" type="submit"> Log In </button>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  {% include "common/footer.html" %}
+</div>
+{% endblock %}
