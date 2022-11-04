@@ -1,0 +1,39 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+{{ organization.name }} - Organization
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        {% if perms.projects.change_organization %}
+          <div class="page-title-right">
+            <a href="{% url 'organization_update_view' organization.id %}" class="btn btn-primary" title="Update">
+              <i class="fa-solid me-1 fa-pen"></i> Update
+            </a>
+          </div>
+        {% endif %}
+        <h4 class="page-title">Organization</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-5 col-lg-6">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card widget-flat">
+            <div class="card-body">
+              <div class="float-end">
+                <i class="mdi mdi-account-multiple widget-icon"></i>
+              </div>
+              <h5 class="text-muted fw-normal mt-0" title="Number of Sectors">Total Projects</h5>
+              <h3 class="mt-3 mb-3">{{ total_projects }}</h3>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+{% endblock %}

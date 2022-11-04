@@ -1,0 +1,92 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Organizations
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        <div class="page-title-right">
+          <a href="{% url 'organization_create_view' %}" class="btn btn-primary">
+            <i class="fa-solid me-1 fa-plus"></i> Add New
+          </a>
+        </div>
+        <h4 class="page-title">Organizations</h4>
+      </div>
+    </div>
+  </div>
+  {% if object_list %}
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane show active" id="basic-datatable-preview">
+                <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="list_table" class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid" aria-describedby="basic-datatable_info" style="position: relative; width: 996px;">
+                        <thead class="mx-3">
+                          <tr>
+                            <th>No.</th>
+                            <th>Organization</th>
+                            <th>Owner Name</th>
+                            <th>Email</th>
+                            <th>Link</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for organization in object_list %}
+                            <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ organization.name }}</td>
+                              <td>{{ organization.owner_name }}</td>
+                              <td>{{ organization.email }}</td>
+                              <td>
+                                {% if organization.about_link %}
+                                  <a href="{{ organization.about_link }}" target="_blank" style="max-width: 150px" class="text-truncate">
+                                    {{ organization.about_link }}
+                                  </a>
+                                {% else %}
+                                  -
+                                {% endif %}
+                              </td>
+                              <td>
+                                {% if perms.projects.view_organization %}
+                                  <a href="{% url 'organization_detail_view' organization.id %}" class="text-decoration-none me-1" title="View">
+                                    <i class="fa-solid fa-eye"></i>
+                                  </a>
+                                {% endif %}
+                                {% if perms.projects.change_organization %}
+                                  <a href="{% url 'organization_update_view' organization.id %}" class="text-decoration-none mx-1" title="Update">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                  </a>
+                                {% endif %}
+                                {% if perms.projects.delete_organization %}
+                                  <a href="{% url 'organization_delete_view' organization.id %}" class="text-decoration-none ms-1 link-danger" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                  </a>
+                                {% endif %}
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      {% url 'organization_list_view' arg arg2 as the_url %}
+                      {% include 'common/pagination.html' with url_view=the_url %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">No organizations found.</div>
+  {% endif %}
+{% endblock %}
