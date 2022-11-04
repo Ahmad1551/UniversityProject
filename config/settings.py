@@ -6,7 +6,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', '7ib&*3b&4ngj^^6&^=vd37364w2mg5m1a(+*vv3s-ui3ftnn&%')
+SECRET_KEY = os.getenv('SECRET_KEY', 'my_key')
 DEBUG = False
 
 ALLOWED_HOSTS = ['jp-property-hub.herokuapp.com', '0.0.0.0', 'localhost', '127.0.0.1', ]
@@ -20,7 +20,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = []
-LOCAL_APPS = ['books', 'core', 'projects']
+LOCAL_APPS = ['books', 'projects', 'core']
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
