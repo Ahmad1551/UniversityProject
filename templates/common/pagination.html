@@ -1,0 +1,35 @@
+{% if is_paginated %}
+  <div class="col-12 text-start pt-3 pb-3">
+    <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
+      <ul class="pagination pagination-rounded">
+        <li class="paginate_button page-item previous {% if not page_obj.has_previous %}disabled{% endif %}" id="datatable-buttons_previous">
+          <a href="{{ url_view }}?page=1" aria-controls="datatable-buttons" class="page-link">
+            First
+            <i class="mdi mdi-chevron-left"></i>
+            </a>
+        </li>
+        <li class="paginate_button page-item previous {% if not page_obj.has_previous %}disabled{% endif %}" id="datatable-buttons_previous">
+          <a href="{{ url_view }}?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}" aria-controls="datatable-buttons" class="page-link">
+            Previous
+            <i class="mdi mdi-chevron-left"></i>
+          </a>
+        </li>
+        <li class="paginate_button page-item active">
+          <a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0" class="page-link">{{ page_obj.number }}/{{ page_obj.paginator.num_pages }}</a>
+        </li>
+        <li class="paginate_button page-item next {% if not page_obj.has_next %}disabled{% endif %}" id="datatable-buttons_next">
+          <a href="{{ url_view }}?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}" aria-controls="datatable-buttons" class="page-link">
+            Next
+            <i class="mdi mdi-chevron-right"></i>
+          </a>
+        </li>
+        <li class="paginate_button page-item next {% if not page_obj.has_next %}disabled{% endif %}" id="datatable-buttons_next">
+          <a href="{{ url_view }}?page={% if page_obj.has_next %}{{ page_obj.paginator.num_pages }}{% endif %}" aria-controls="datatable-buttons" class="page-link">
+            Last
+            <i class="mdi mdi-chevron-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endif %}

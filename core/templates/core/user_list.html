@@ -1,0 +1,87 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Users
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        <div class="page-title-right">
+          <a href="{% url 'user_create_view' %}" class="btn btn-primary">
+            <i class="fa-solid me-1 fa-plus"></i> Add New
+          </a>
+        </div>
+        <h4 class="page-title">Users</h4>
+      </div>
+    </div>
+  </div>
+
+  {% if object_list %}
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane show active" id="basic-datatable-preview">
+                <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="list_table" class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid" aria-describedby="basic-datatable_info" style="position: relative; width: 996px;">
+                        <thead class="mx-3">
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Join Date</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for user in object_list %}
+                            <tr>
+                              <td>{{ user.get_full_name }}</td>
+                              <td>{{ user.username }}</td>
+                              <td>{{ user.email }}</td>
+                              <td>{{ user.created_at|date:"M d, Y" }}</td>
+                              <td>{{ user.user_type }}</td>
+
+                              {% if user.is_active %}
+                                <td><span class="badge bg-success">Active</span></td>
+                              {% else %}
+                                <td><span class="badge bg-danger">Inactive</span></td>
+                              {% endif %}
+
+                              <td>
+                                <a href="{% url 'user_detail_view' user.id %}" class="text-decoration-none me-1" title="View">
+                                  <i class="fa-solid me-1 fa-eye"></i>
+                                </a>
+                                <a href="{% url 'user_update_view' user.id %}" class="text-decoration-none mx-1" title="Update">
+                                  <i class="fa-solid me-1 fa-pen-to-square"></i>
+                                </a>
+                                <a href="{% url 'user_delete_view' user.id %}" class="text-decoration-none ms-1 link-danger" title="Delete">
+                                  <i class="fa-solid me-1 fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      {% url 'user_list_view' arg arg2 as the_url %}
+                      {% include 'common/pagination.html' with url_view=the_url %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">No Users found.</div>
+  {% endif %}
+{% endblock %}

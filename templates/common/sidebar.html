@@ -2,14 +2,23 @@
   <a href="/" class="d-flex justify-content-center mt-2 mb-1">
     <span class="fs-3 mb-2 text-white">Property HUB</span>
   </a>
+
   <ul class="side-nav">
-    <li class="side-nav-title side-nav-item">Navigation</li>
+    <li class="side-nav-title side-nav-item">Modules</li>
     <li class="side-nav-item">
       <a href="{% url 'dashboard_view' %}" class="side-nav-link">
         <i class="uil-home-alt"></i>
-        <span> Dashboards </span>
+        <span>Dashboards</span>
       </a>
     </li>
-    <li class="side-nav-title side-nav-item">Apps</li>
+
+    {% if perms.core.view_user %}
+      <li class="side-nav-item">
+        <a href="{% url 'user_list_view' %}" class="side-nav-link">
+          <i class="uil-users-alt"></i>
+          <span>Users</span>
+        </a>
+      </li>
+    {% endif %}
   </ul>
 </div>
