@@ -97,7 +97,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "core" / "static", ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-WKHTMLTOPDF_CMD = "C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"
+# WKHTMLTOPDF_CMD = "C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
