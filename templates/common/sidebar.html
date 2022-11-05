@@ -20,6 +20,22 @@
         </a>
       </li>
     {% endif %}
+    {% if perms.edu.view_plan %}
+      <li class="side-nav-item">
+        <a href="{% url 'plan_list_view' %}" class="side-nav-link">
+          <i class="uil-users-alt"></i>
+          <span>Services</span>
+        </a>
+      </li>
+    {% endif %}
+    {% if perms.edu.view_subscription %}
+      <li class="side-nav-item">
+        <a href="{% url 'subscription_list_view' %}" class="side-nav-link">
+          <i class="uil-users-alt"></i>
+          <span>Subscription Ledger</span>
+        </a>
+      </li>
+    {% endif %}
     {% if request.user.is_superuser %}
       <li class="side-nav-item">
         <a href="{% url 'organization_list_view' %}" class="side-nav-link">

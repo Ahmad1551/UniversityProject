@@ -1,12 +1,11 @@
-#products views
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from config.mixins import PermissionRequiredMixin
 from config.settings import DEFAULT_PAGINATION_SIZE
-from projects.models import Organization, Product
 from projects.forms import ProductForm
+from projects.models import Organization, Product
 
 
 class ProductBaseView(PermissionRequiredMixin, View):

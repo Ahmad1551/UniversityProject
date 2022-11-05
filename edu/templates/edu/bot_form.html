@@ -1,0 +1,88 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  {% if 'update' in request.path %}
+    Update {{ bot.name }}
+  {% else %}
+    Create Bot
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center page-title-box">
+    <h4 class="page-title">
+      {% if 'update' in request.path %}
+        Update {{ bot.name }}
+      {% else %}
+        Create Bot
+      {% endif %}
+    </h4>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane show active" id="input-types-preview">
+              <form action="" method="post" class="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="image" class="form-label">Bot Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="name" class="form-label">Bot Name</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    {{ form.description }}
+                    {{ form.description.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="is_active" class="form-label">Active</label>
+                      <div class="form-check form-switch">
+                        {{ form.is_active }}
+                        <small>{{ form.is_active.help_text }}</small>
+                      </div>
+                      {{ form.is_active.errors }}
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="is_active" class="form-label">Online</label>
+                      <div class="form-check form-switch">
+                        {{ form.is_online }}
+                        <small>{{ form.is_online.help_text }}</small>
+                      </div>
+                      {{ form.is_online.errors }}
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <label for="is_active" class="form-label">Verified</label>
+                      <div class="form-check form-switch">
+                        {{ form.is_verified }}
+                        <small>{{ form.is_verified.help_text }}</small>
+                      </div>
+                      {{ form.is_verified.errors }}
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-start pt-3 pb-3">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input class="btn btn-danger" type="reset">
+                    <a href="{% url 'bot_list_view' %}" class="btn btn-secondary">Back</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
