@@ -1,0 +1,100 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  {% if 'update' in request.path %}
+    Update {{ product.name }}
+  {% else %}
+    Create Product
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center page-title-box">
+    <h4 class="page-title">
+      {% if 'update' in request.path %}
+        Update {{ product.name }}
+      {% else %}
+        Create Product
+      {% endif %}
+    </h4>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane show active" id="input-types-preview">
+              <form action="" method="post" class="d-flex justify-content-between" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="image" class="form-label">Product Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="name" class="form-label">Product Name</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="plan_description" class="form-label">Product Type</label>
+                    {{ form.plan_description }}
+                    <small>{{ form.plan_description.help_text }}</small>
+                    {{ form.plan_description.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="original_price" class="form-label">Market Price</label>
+                    {{ form.original_price }}
+                    <small>{{ form.original_price.help_text }}</small>
+                    {{ form.original_price.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="seller_price" class="form-label">Your Price</label>
+                    {{ form.seller_price }}
+                    <small>{{ form.seller_price.help_text }}</small>
+                    {{ form.seller_price.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    {{ form.quantity }}
+                    <small>{{ form.quantity.help_text }}</small>
+                    {{ form.quantity.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="description" class="form-label">Product Description</label>
+                    {{ form.description }}
+                    <small>{{ form.description.help_text }}</small>
+                    {{ form.description.errors }}
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3 d-flex justify-content-between">
+                    <label for="is_active" class="form-label">In Stock</label>
+                    <div class="form-check form-switch">
+                      {{ form.is_available }}
+                      <small>{{ form.is_available.help_text }}</small>
+                    </div>
+                    {{ form.is_available.errors }}
+                  </div>
+
+                  <div class="col-12 text-start pt-3 pb-3">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input class="btn btn-danger" type="reset">
+                    <a href="{% url 'product_list_view' %}" class="btn btn-secondary">Back</a>
+                  </div>
+                </div>
+                {{ form.errors }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

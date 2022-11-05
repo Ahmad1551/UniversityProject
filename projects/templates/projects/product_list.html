@@ -1,0 +1,112 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Shop Now
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        {% if perms.projects.add_product %}
+          <div class="page-title-right">
+            <a href="{% url 'product_create_view' %}" class="btn btn-primary">
+              <i class="fa-solid me-1 fa-plus"></i> Add New
+            </a>
+          </div>
+        {% endif %}
+        <h4 class="page-title">Shop</h4>
+      </div>
+    </div>
+  </div>
+  {% if object_list %}
+    <div class="row">
+      <div class="col-lg-12 d-flex">
+        {% for product in object_list %}
+          <div class="col-lg-3 p-3">
+            <div class="card ribbon-box">
+              <div class="card-body pt-0 px-0">
+                {% if product.is_available %}
+                  <div class="ribbon-two ribbon-two-success">
+                    <span>In Stock</span>
+                  </div>
+                {% else %}
+                  <div class="ribbon-two ribbon-two-danger">
+                    <span>Stock Out</span>
+                  </div>
+                {% endif %}
+                <img src="{{ product.image.url }}" class="card-img-top" width="100%">
+                <div class="d-flex flex-row justify-content-between align-items-center mb-0 mt-1 px-2">
+                  <h5>{{ product.name }}</h5>
+                  <span class="badge badge-success-lighten fs-5">
+                    <i class="uil-bolt"></i>
+                    {{ product.discount }}% off
+                  </span>
+                </div>
+                <hr class="my-1">
+                <div class="d-flex flex-row justify-content-between px-3">
+                  <div class="d-flex flex-column">
+                    <h5 class="mb-0">Plan Type</h5>
+                    <h5 class="mb-0">Seller</h5>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <div class="mt-1 text-end">{{ product.plan_description }}</div>
+                    <div class="text-end mt-1">
+                      <div class="d-flex align-items-center">
+                        <div class="avatar-xs me-1">
+                          {% if product.organization.image %}
+                            <img src="{{ product.organization.image.url }}" alt="organization-image" class="img-fluid rounded-circle" width="30">
+                          {% else %}
+                            <span class="avatar-title rounded-circle bg-soft-primary text-white">
+                              {{ product.organization.name|make_list|first }}
+                            </span>
+                          {% endif %}
+                        </div>
+                        <a href="{% url 'organization_detail_view' product.organization.id %}" class="text-decoration-none">
+                          {{ product.organization.name }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-row justify-content-between p-3 mid">
+                  <div class="d-flex flex-column">
+                    <div class="mb-1 fw-bold">Original Price</div>
+                    <div class="d-flex flex-row ms-2 fw-bold text-danger">
+                      <i class="uil-dollar-alt"></i>
+                      {{ product.original_price }}
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <div class="mb-1 fw-bold">Seller Price</div>
+                    <div class="d-flex flex-row ms-2 fw-bold text-success">
+                      <i class="uil-dollar-alt"></i>
+                      {{ product.seller_price }}
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-row justify-content-center">
+                  <a href="{% url 'product_detail_view' product.id %}" class="btn btn-primary btn-sm mx-1">
+                    <i class="fa-solid me-1 fa-eye"></i> View
+                  </a>
+                  {% if perms.projects.change_product %}
+                    <a href="{% url 'product_update_view' product.id %}" class="btn btn-info btn-sm mx-1">
+                      <i class="fa-solid me-1 fa-edit"></i> Edit
+                    </a>
+                  {% endif %}
+                  {% if perms.projects.delete_product %}
+                    <a href="{% url 'product_delete_view' product.id %}" class="btn btn-danger btn-sm mx-1">
+                      <i class="fa-solid me-1 fa-trash"></i> Delete
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">No Product display.</div>
+  {% endif %}
+{% endblock %}

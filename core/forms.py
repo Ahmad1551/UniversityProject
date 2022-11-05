@@ -8,6 +8,7 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = [
             "first_name", "last_name", "username", "email", "password1", "password2", "phone_number", "user_type", "is_active",
+            "user_image"
         ]
 
     def __init__(self, *args, **kwargs):
@@ -21,7 +22,7 @@ class UpdateForm(UserChangeForm):
         model = User
         fields = [
             "first_name", "last_name", "username", "email", "phone_number",
-            "user_type", "is_active",
+            "user_type", "is_active", "user_image"
         ]
 
     def __init__(self, *args, **kwargs):

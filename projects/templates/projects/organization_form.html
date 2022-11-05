@@ -29,6 +29,11 @@
                 {% csrf_token %}
                 <div class="row">
                   <div class="col-lg-6 px-2 mb-3">
+                    <label for="image" class="form-label">Company Brand Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                  </div>
+
+                  <div class="col-lg-6 px-2 mb-3">
                     <label for="name" class="form-label">Name</label>
                     {{ form.name }}
                     {{ form.name.errors }}

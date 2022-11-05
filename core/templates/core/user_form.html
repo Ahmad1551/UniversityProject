@@ -25,10 +25,15 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane show active" id="input-types-preview">
-              <form action="" method="post" class="d-flex justify-content-between">
+              <form enctype="multipart/form-data" action="" method="post" class="d-flex justify-content-between">
                 {% csrf_token %}
 
                 <div class="row">
+                  <div class="col-lg-6 px-2 mb-3">
+                    <label for="image" class="form-label">User Image</label>
+                    <input type="file" class="form-control" id="user_image" name="user_image">
+                  </div>
+
                   <div class="col-lg-6 px-2 mb-3">
                     <label for="username" class="form-label">Username</label>
                     {{ form.username }}
@@ -54,21 +59,9 @@
                   </div>
 
                   <div class="col-lg-6 px-2 mb-3">
-                    <label for="identity_card" class="form-label">Identity Card (CNIC)</label>
-                    {{ form.identity_card }}
-                    {{ form.identity_card.errors }}
-                  </div>
-
-                  <div class="col-lg-6 px-2 mb-3">
                     <label for="phone_number" class="form-label">Phone Number</label>
                     {{ form.phone_number }}
                     {{ form.phone_number.errors }}
-                  </div>
-
-                  <div class="col-lg-6 px-2 mb-3">
-                    <label for="postal_address" class="form-label">Postal Address</label>
-                    {{ form.postal_address }}
-                    {{ form.postal_address.errors }}
                   </div>
 
                   <div class="col-lg-6 px-2 mb-3">

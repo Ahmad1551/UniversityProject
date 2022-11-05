@@ -40,9 +40,23 @@
                         </thead>
                         <tbody>
                           {% for organization in object_list %}
-                            <tr>
+                            <tr class="align-middle">
                               <td>{{ forloop.counter }}</td>
-                              <td>{{ organization.name }}</td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="avatar-sm me-1 p-1">
+                                    {% if organization.image %}
+                                      <img src="{{ organization.image.url }}" alt="organization-image" class="img-fluid rounded-circle">
+                                    {% else %}
+                                      <span class="avatar-title rounded-circle bg-soft-primary text-white">
+                                        {{ organization.name|make_list|first }}
+                                      </span>
+                                    {% endif %}
+                                  </div>
+                                  <h5 class="font-size-14 my-0">
+                                    {{ organization.name }}
+                                  </h5>
+                              </td>
                               <td>{{ organization.owner_name }}</td>
                               <td>{{ organization.email }}</td>
                               <td>

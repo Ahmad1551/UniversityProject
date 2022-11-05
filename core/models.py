@@ -16,5 +16,6 @@ class User(AbstractUser, TimeStampedModel):
 
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
 
+    user_image = models.ImageField(upload_to='users', null=True, blank=True)
     phone_number = models.CharField(max_length=13, null=True, blank=True)
     user_type = models.CharField(max_length=8, choices=UserTypeChoices.choices, default=UserTypeChoices.BUYER)

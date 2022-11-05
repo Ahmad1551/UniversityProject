@@ -42,8 +42,24 @@
                         </thead>
                         <tbody>
                           {% for user in object_list %}
-                            <tr>
-                              <td>{{ user.get_full_name }}</td>
+                            <tr class="align-middle">
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="avatar-sm me-1 p-1">
+                                    {% if user.user_image %}
+                                      <img src="{{ user.user_image.url }}" alt="user-image" class="img-fluid rounded-circle">
+                                    {% else %}
+                                      <span class="avatar-title rounded-circle bg-soft-primary text-white">
+                                        {{ user.first_name|make_list|first }}
+                                      </span>
+                                    {% endif %}
+                                  </div>
+                                  <h5 class="font-size-14 my-0">
+                                    {{ user.get_full_name }}
+                                  </h5>
+                                </div>
+                                <!-- {{ user.get_full_name }} -->
+                              </td>
                               <td>{{ user.username }}</td>
                               <td>{{ user.email }}</td>
                               <td>{{ user.created_at|date:"M d, Y" }}</td>

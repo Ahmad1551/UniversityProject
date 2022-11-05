@@ -3,7 +3,13 @@
     <li class="dropdown notification-list">
       <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
         <span class="account-user-avatar">
-          <img src="https://github.com/mdo.png" alt="user-image" class="rounded-circle">
+          {% if user.user_image %}
+            <img src="{{ request.user.user_image.url }}" alt="user-image" class="img-fluid rounded-circle">
+          {% else %}
+            <span class="avatar-title rounded-circle bg-soft-primary text-white">
+              {{ user.first_name|make_list|first }}
+            </span>
+          {% endif %}
         </span>
         <span>
           <span class="account-user-name">{{ request.user.get_full_name }}</span>

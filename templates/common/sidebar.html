@@ -20,5 +20,21 @@
         </a>
       </li>
     {% endif %}
+    {% if request.user.is_superuser %}
+      <li class="side-nav-item">
+        <a href="{% url 'organization_list_view' %}" class="side-nav-link">
+          <i class="uil-store"></i>
+          <span>Organizations</span>
+        </a>
+      </li>
+    {% endif %}
+    {% if perms.projects.view_product %}
+      <li class="side-nav-item">
+        <a href="{% url 'product_list_view' %}" class="side-nav-link">
+          <i class="uil-shopping-trolley"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+    {% endif %}
   </ul>
 </div>

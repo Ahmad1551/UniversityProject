@@ -1,0 +1,245 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Detail | #{{ file.plot.plot_book_number }}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        <h4 class="page-title">Product</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <!-- Product image -->
+                        <a class="text-center d-block mb-4">
+                          <img src="{{ product.image.url }}" class="img-fluid rounded img-thumbnail" style="max-width: 280px;" alt="Product-img">
+                        </a>
+
+                    </div> <!-- end col -->
+                    <div class="col-lg-7">
+                        <form class="ps-lg-4">
+                            <!-- Product title -->
+                            <h3 class="mt-0">Reg No. ZX9837538XC95589 <a href="{% url 'product_update_view' product.id %}" class="text-muted"><i class="mdi mdi-square-edit-outline ms-2"></i></a> </h3>
+                            <p class="mb-1">Registration Date: {{ file.created_at|date:"M d, Y" }}</p>
+
+                            <!-- Product stock -->
+                            <div class="mt-1">
+                                <h4><span class="badge badge-success-lighten">Legit</span></h4>
+                            </div>
+
+                            <!-- Product description -->
+                            <div class="mt-3">
+                                <h6 class="font-14">Sold Price:</h6>
+                                <h3>{{ file.total_amount }} PKR</h3>
+                            </div>
+
+                            <!-- Quantity -->
+                            <div class="mt-2">
+                              <button type="button" class="btn btn-info"><i class="mdi mdi-cart me-1"></i>View Installments</button>
+                            </div>
+
+                            <!-- Product information -->
+                            <div class="mt-2">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="font-14">Down Payment</h6>
+                                        <p class="text-sm lh-150">{{ file.down_payment }} PKR</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="font-14">Possession Amount</h6>
+                                        <p class="text-sm lh-150">{{ file.on_possession }} PKR</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="font-14">Monthly Installment</h6>
+                                        <p class="text-sm lh-150">{{ file.installment_plans.monthly_installment }} PKR</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div> <!-- end col -->
+                </div> <!-- end row-->
+                <div class="row">
+                  <h4 class="header-title mt-1 mb-3 bg-primary p-2 text-white">Owner Details</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="font-14">Name</h6>
+                        <p class="text-sm lh-150">{{ file.user.user.get_full_name }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="font-14">Username</h6>
+                        <p class="text-sm lh-150">@{{ file.user.user.username }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="font-14">Email</h6>
+                        <p class="text-sm lh-150">{{ file.user.user.email }}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h6 class="font-14">CNIC</h6>
+                      <p class="text-sm lh-150">{{ file.user.user.identity_card }}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Passport</h6>
+                      <p class="text-sm lh-150">{{ file.user.user.passport_number }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Domicile</h6>
+                    <p class="text-sm lh-150">{{ file.user.domicile }}</p>
+                </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Phone No.</h6>
+                      <p class="text-sm lh-150">{{ file.user.user.phone_number }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Telephone No.</h6>
+                    <p class="text-sm lh-150">{{ file.user.user.telephone_number }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Education</h6>
+                    <p class="text-sm lh-150">{{ file.user.education }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Profession</h6>
+                    <p class="text-sm lh-150">{{ file.user.profession }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Nationality</h6>
+                    <p class="text-sm lh-150">{{ file.user.nationality }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Religion</h6>
+                    <p class="text-sm lh-150">{{ file.user.religion }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Date of Birth</h6>
+                    <p class="text-sm lh-150">{{ file.user.date_of_birth }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Guardian Income</h6>
+                    <p class="text-sm lh-150">{{ file.user.guardian_income }}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="font-14">Guardian Profession</h6>
+                    <p class="text-sm lh-150">{{ file.user.guardian_profession }}</p>
+                  </div>
+                  <div class="col-md-12">
+                    <h6 class="font-14">Postal Address</h6>
+                    <p class="text-sm lh-150">{{ file.user.user.postal_address }}</p>
+                  </div>
+
+                  <div class="col-md-12">
+                    <h6 class="font-14">Permanent Address</h6>
+                    <p class="text-sm lh-150">{{ file.user.user.permanent_address }}</p>
+                  </div>
+                  <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a data-bs-toggle="tab" aria-expanded="true" class="nav-link" aria-selected="false" tabindex="-1" role="tab">
+                        Next of Kin
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Name</h6>
+                    <p class="text-sm lh-150">{{ file.user.nok_name }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Relation</h6>
+                    <p class="text-sm lh-150">{{ file.user.nok_relation }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Identity Card</h6>
+                    <p class="text-sm lh-150">{{ file.user.nok_identity_card }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Passport</h6>
+                    <p class="text-sm lh-150">{{ file.user.nok_passport }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Phone</h6>
+                    <p class="text-sm lh-150">{{ file.user.nok_phone }}</p>
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <h4 class="header-title mt-1 mb-3 bg-primary p-2 text-white">Property Details</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h6 class="font-14">Project</h6>
+                      <p class="text-sm lh-150">{{ file.plot.block.sector.project.name }}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Sector</h6>
+                      <p class="text-sm lh-150">{{ file.plot.block.sector.name }}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Block</h6>
+                      <p class="text-sm lh-150">{{ file.plot.block.name }}</p>
+                  </div>
+                    <div class="col-md-4">
+                        <h6 class="font-14">Plot No.</h6>
+                        <p class="text-sm lh-150">{{ file.plot.plot_book_number }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="font-14">Area</h6>
+                        <p class="text-sm lh-150">{{ file.plot.area_in_marla }} Marla</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="font-14">Length</h6>
+                        <p class="text-sm lh-150">{{ file.plot.length }}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h6 class="font-14">Width</h6>
+                      <p class="text-sm lh-150">{{ file.plot.width }}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Plot Type</h6>
+                      <p class="text-sm lh-150">{{ file.plot.plot_type }}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h6 class="font-14">Cornered</h6>
+                      <p class="text-sm lh-150">
+                        {% if file.plot.is_cornered %}
+                          <span class="badge bg-success py-1 px-2 fs-6">True</span>
+                        {% else %}
+                          <span class="badge bg-danger py-1 px-2 fs-6">False</span>
+                        {% endif %}
+                      </p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Park Facing</h6>
+                    <p class="text-sm lh-150">
+                      {% if file.plot.is_park_facing %}
+                        <span class="badge bg-success py-1 px-2 fs-6">True</span>
+                      {% else %}
+                        <span class="badge bg-danger py-1 px-2 fs-6">False</span>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="font-14">Boulevard</h6>
+                    <p class="text-sm lh-150">
+                      {% if file.plot.is_main_boulevard %}
+                        <span class="badge bg-success py-1 px-2 fs-6">True</span>
+                      {% else %}
+                        <span class="badge bg-danger py-1 px-2 fs-6">False</span>
+                      {% endif %}
+                    </p>
+                  </div>
+                </div>
+                </div>
+
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+  </div>
+{% endblock %}
