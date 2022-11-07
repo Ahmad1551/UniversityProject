@@ -52,7 +52,7 @@ Dashboard
         <div class="card border border-primary bg-primary card-bg-img" style="background-image: url({% static 'images/bg-pattern-dark.png' %});">
           <div class="card-body">
             <h5 class="fs-2 text-white text-center">
-              Everything is figureoutable - with 24/7 homework help
+              Discover everything bartleby has to offer
             </h5>
             <div class="app-search dropdown mt-4 mb-3">
               <form action="{% url 'chegg_view' %}" method="post">
@@ -111,6 +111,7 @@ Dashboard
     </div>
 
     <div class="col-xxl-3">
+      {% if subscription.user %}
         <div class="row">
           <div class="col-md-6 col-xxl-12">
             <div class="card border {% if subscription.is_expired == False %}border-primary bg-primary {% else %}border-warning bg-warning{% endif %} card-bg-img" style="background-image: url({% static 'images/bg-pattern.png' %});">
@@ -188,6 +189,7 @@ Dashboard
             </div>
           </div>
         </div>
+      {% endif %}
         <div class="row">
           <h5>Serving Bots</h5>
           <div class="col-md-6 col-xxl-12">

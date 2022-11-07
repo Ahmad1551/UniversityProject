@@ -28,6 +28,11 @@ class PlanCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('plan_list_view')
     permission_required = 'edu.add_plan'
 
+    def get_form_kwargs(self):
+        kwargs = super(PlanCreateView, self).get_form_kwargs()
+        kwargs['organization_id'] = self.request.user.organization_id
+        return kwargs
+
     def form_valid(self, form):
         form.instance.organization = self.request.user.organization
         return super().form_valid(form)
@@ -42,6 +47,11 @@ class PlanUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = PlanForm
     success_url = reverse_lazy('plan_list_view')
     permission_required = 'edu.change_plan'
+
+    def get_form_kwargs(self):
+        kwargs = super(PlanUpdateView, self).get_form_kwargs()
+        kwargs['organization_id'] = self.request.user.organization_id
+        return kwargs
 
     def form_valid(self, form):
         form.instance.organization = self.request.user.organization

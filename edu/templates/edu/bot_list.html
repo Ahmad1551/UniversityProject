@@ -1,0 +1,114 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Bots
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box">
+        <div class="page-title-right">
+          <a href="{% url 'bot_create_view' %}" class="btn btn-primary">
+            <i class="fa-solid me-1 fa-plus"></i> Add New
+          </a>
+        </div>
+        <h4 class="page-title">Bots</h4>
+      </div>
+    </div>
+  </div>
+  {% if object_list %}
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane show active" id="basic-datatable-preview">
+                <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="list_table" class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid" aria-describedby="basic-datatable_info" style="position: relative; width: 996px;">
+                        <thead class="mx-3">
+                          <tr>
+                            <th>Sr.</th>
+                            <th>Bot Name</th>
+                            <th>Creation Date</th>
+                            <th>Active</th>
+                            <th>Online</th>
+                            <th>Verified</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for bot in object_list %}
+                            <tr class="align-middle">
+                              <td>{{ forloop.counter }}</td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="avatar-sm me-1 p-1">
+                                    {% if bot.image %}
+                                      <img src="{{ bot.image.url }}" alt="organization-image" class="img-fluid rounded-circle">
+                                    {% else %}
+                                      <span class="avatar-title rounded-circle bg-soft-primary text-white">
+                                        {{ bot.name }}|make_list|first }}
+                                      </span>
+                                    {% endif %}
+                                  </div>
+                                  <h5 class="font-size-14 my-0">
+                                    {{ bot.name }}
+                                  </h5>
+                                </div>
+                              </td>
+                              <td>{{ bot.created_at }}</td>
+                              <td>
+                                {% if bot.is_active %}
+                                  <span class="badge bg-success">Active</span>
+                                {% else %}
+                                  <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                              </td>
+                              <td>
+                                {% if bot.is_online %}
+                                  <span class="badge bg-success">Online</span>
+                                {% else %}
+                                  <span class="badge bg-danger">Offline</span>
+                                {% endif %}
+                              </td>
+                              <td>
+                                {% if bot.is_verified %}
+                                  <span class="badge bg-success">Verified</span>
+                                {% else %}
+                                  <span class="badge bg-danger">Unverified</span>
+                                {% endif %}
+                              </td>
+                              <td>
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-cog"></i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'bot_detail_view' bot.id %}">View</a>
+                                    <a class="dropdown-item" href="{% url 'bot_update_view' bot.id %}">Edit</a>
+                                    <a class="dropdown-item" href="{% url 'bot_delete_view' bot.id %}">Delete</a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      {% url 'bot_list_view' arg arg2 as the_url %}
+                      {% include 'common/pagination.html' with url_view=the_url %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">No plans found.</div>
+  {% endif %}
+{% endblock %}

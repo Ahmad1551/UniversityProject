@@ -62,3 +62,7 @@ input:focus, select:focus, textarea:focus{
 .embed-responsive iframe {
   width: 100%;
 }
+
+p img {
+  width: -webkit-fill-available;
+}

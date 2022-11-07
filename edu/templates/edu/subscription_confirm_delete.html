@@ -1,0 +1,26 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+  Delete | {{ subscription.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="modal-dialog shadow">
+    <div class="modal-content mt-5">
+      <div class="modal-header modal-colored-header bg-danger">
+          <h4 class="modal-title" id="danger-header-modalLabel">Delete Subscription</h4>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure you want to delete {{ subscription.name }}.</p>
+          <p class="text-danger">This action can not be revert back.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <a href="{% url 'subscription_list_view' %}" class="btn btn-light">Cancel</a>
+          <input type="submit" class="btn btn-danger" value="Confirm" />
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

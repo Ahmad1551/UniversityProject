@@ -20,6 +20,14 @@
         </a>
       </li>
     {% endif %}
+    {% if perms.edu.view_bot %}
+      <li class="side-nav-item">
+        <a href="{% url 'bot_list_view' %}" class="side-nav-link">
+          <i class="uil-users-alt"></i>
+          <span>Service Bots</span>
+        </a>
+      </li>
+    {% endif %}
     {% if perms.edu.view_plan %}
       <li class="side-nav-item">
         <a href="{% url 'plan_list_view' %}" class="side-nav-link">
@@ -52,5 +60,11 @@
         </a>
       </li>
     {% endif %}
+    <li class="side-nav-item">
+      <a href="{% url 'chegg_view' %}" class="side-nav-link">
+        <i class="uil-users-alt"></i>
+        <span>Chegg</span>
+      </a>
+    </li>
   </ul>
 </div>
