@@ -6,6 +6,10 @@ from edu.views.chegg import CheggView
 from edu.views.plan import PlanCreateView, PlanDeleteView, PlanDetailView, PlanListView, PlanUpdateView
 from edu.views.subscription import (SubscriptionCreateView, SubscriptionDeleteView, SubscriptionDetailView,
                                     SubscriptionListView, SubscriptionUpdateView)
+from edu.views.assignment import (
+                                AssignmentCreateView, AssignmentDeleteView, AssignmentDetailView, AssignmentListView, AssignmentUpdateView
+                                )
+
 
 urlpatterns = [
     path('chegg/', CheggView.as_view(), name='chegg_view'),
@@ -24,4 +28,10 @@ urlpatterns = [
     path('subscription/<int:pk>/', SubscriptionDetailView.as_view(), name='subscription_detail_view'),
     path('subscription/<int:pk>/update/', SubscriptionUpdateView.as_view(), name='subscription_update_view'),
     path('subscription/<int:pk>/delete/', SubscriptionDeleteView.as_view(), name='subscription_delete_view'),
+    path('assignments/', AssignmentListView.as_view(), name='assignment_list_view'),
+    path('assignment/create/', AssignmentCreateView.as_view(), name='assignment_create_view'),
+    path('assignment/<int:pk>/', AssignmentDetailView.as_view(), name='assignment_detail_view'),
+    path('assignment/<int:pk>/update/', AssignmentUpdateView.as_view(), name='assignment_update_view'),
+    path('assignment/<int:pk>/delete/', AssignmentDeleteView.as_view(), name='assignment_delete_view'),
+
 ]
