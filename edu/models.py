@@ -78,3 +78,19 @@ class Subscription(TimeStampedModel):
 
     def __str__(self):
         return self.plan.name
+
+
+class Assignment(TimeStampedModel):
+    user = models.ForeignKey('core.User', on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=255, null=True, blank=True)
+    image = models.ImageField(blank=True, null=True, upload_to='assignment_images')
+    price = models.PositiveIntegerField(default=0, blank=True, null=True)
+    upload_file = models.FileField(upload_to='ask_assignments', null=True, blank=True)
+    question_text = models.TextField(blank=True, null=True)
+    deadline = models.DateTimeField(blank=True, null=True)
+    status = models.BooleanField(default=False)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
