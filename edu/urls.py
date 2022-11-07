@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+from edu.views.bartleby import BartlebyView
 from edu.views.bot import BotCreateView, BotDeleteView, BotDetailView, BotListView, BotUpdateView
 from edu.views.chegg import CheggView
 from edu.views.plan import PlanCreateView, PlanDeleteView, PlanDetailView, PlanListView, PlanUpdateView
@@ -9,6 +10,7 @@ from edu.views.subscription import (SubscriptionCreateView, SubscriptionDeleteVi
 
 urlpatterns = [
     path('chegg/', CheggView.as_view(), name='chegg_view'),
+    path('bartleby/', BartlebyView.as_view(), name='bartleby_view'),
     path('bots/', BotListView.as_view(), name='bot_list_view'),
     path('bot/create/', BotCreateView.as_view(), name='bot_create_view'),
     path('bot/<int:pk>/', BotDetailView.as_view(), name='bot_detail_view'),

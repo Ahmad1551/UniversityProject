@@ -1,3 +1,5 @@
+import datetime
+
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -28,8 +30,14 @@ class SubscriptionCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('subscription_list_view')
     permission_required = 'edu.add_subscription'
 
+    def get_form_kwargs(self):
+        kwargs = super(SubscriptionCreateView, self).get_form_kwargs()
+        kwargs['organization_id'] = self.request.user.organization_id
+        return kwargs
+
     def form_valid(self, form):
-        form.instance.organization = self.request.user.organization
+        validity_months = form.cleaned_data['plan'].duration
+        form.instance.end_date = datetime.date.today() + datetime.timedelta(days=validity_months * 30)
         return super().form_valid(form)
 
 
@@ -43,8 +51,14 @@ class SubscriptionUpdateView(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('subscription_list_view')
     permission_required = 'edu.change_subscription'
 
+    def get_form_kwargs(self):
+        kwargs = super(SubscriptionCreateView, self).get_form_kwargs()
+        kwargs['organization_id'] = self.request.user.organization_id
+        return kwargs
+
     def form_valid(self, form):
-        form.instance.organization = self.request.user.organization
+        validity_months = form.cleaned_data['plan'].duration
+        form.instance.end_date = datetime.date.today() + datetime.timedelta(days=validity_months * 30)
         return super().form_valid(form)
 
 
